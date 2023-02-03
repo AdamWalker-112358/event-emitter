@@ -13,15 +13,15 @@ export default class Clock extends EventEmitter {
   }
   
   start(){
+   this.emit('tickStarted')
    this.tickInterval = setInterval( ()=>{
-      // this.emit('tickStarted')
       this.tick()
     },this.tickDuration)
   }
 
-  stop(){
+  async stop(){
     clearInterval(this.tickInterval)
-    // this.emit('tickStopped')
+    setTimeout(() => this.emit('tickStopped'),0)
   }
   
   private tick(){

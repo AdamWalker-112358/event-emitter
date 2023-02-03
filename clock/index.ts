@@ -2,6 +2,8 @@
 import EventEmitter from './EventEmitter'
 import Clock from './Clock'
 
+
+
 // const takeaway = new EventEmitter()
 
 // const ready =()=> console.log('Come and get the food')
@@ -22,9 +24,19 @@ import Clock from './Clock'
 let rolex = new Clock(500)
 
 rolex.on('tick', (payload: any)=>{
-  if (payload.tickCount >= 5)  rolex.stop()
-  console.log( 'tick: ', payload.tickCount)
+  console.log( 'Rolex tick: ', payload.tickCount)
 })
+
+rolex.once('tick', (payload: any)=>{
+  console.log( 'Rolex tick (once): ', payload.tickCount)
+})
+
+rolex.on('tick', (payload: any) => {
+  if (payload.tickCount >= 5) rolex.stop()
+})
+
+rolex.on('tickStarted', () => console.log('Rolex Started'))
+rolex.on('tickStopped', () => console.log('Rolex Stopped'))
 
 
 
